@@ -1,7 +1,7 @@
 import React from 'react'
 import { history } from './history'
 import { Router, Route, Switch } from 'react-router'
-import PrivateRouter from './components/PrivateRoute'
+
 
 import Home from './pages/Home/index'
 import Dashboard from './pages/Dashboard'

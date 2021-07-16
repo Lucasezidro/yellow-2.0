@@ -1,18 +1,17 @@
-import {
-    ErrorMessage,
-    Formik,
-    Form,
-    Field
-} from 'formik'
+import { Formik, Form, Field } from 'formik'
 
 import * as yup from 'yup'
 import axios from 'axios'
-import { history } from '../../history'
+import { useHistory } from 'react-router-dom'
+
+// import { history } from '../../history'
 import SignWithGoogle from '../../components/Auth/SignWithGoogle'
 
 import { Container } from './styles'
 
 export default function CreateAccount(){
+    const history = useHistory()
+
     const handleSubmit = values => {
         axios.post('http://localhost:8080/v1/api/user', values)
         .then(resp => {
@@ -58,14 +57,10 @@ export default function CreateAccount(){
                                 className="input"
                                 placeholder="Your best e-mail" 
                                 name="email" 
+                                required
 
                             />
-                            <ErrorMessage 
-                                component="span" 
-                                name="email"
-                                className="error"
-                                
-                                />
+                            
 
                             <Field
                                 id="password" 
@@ -73,31 +68,23 @@ export default function CreateAccount(){
                                 className="input"
                                 placeholder="Password" 
                                 name="password" 
+                                required
 
                             />
 
-                            <ErrorMessage 
-                                component="span" 
-                                name="password"
-                                className="error"
-                                
-                                />  
+                         
 
                             <Field
                                 id="confirm" 
-                                type="confirm" 
+                                type="password" 
                                 className="input"
                                 placeholder="Confirm Password" 
                                 name="confirm" 
+                                required
 
                             />
 
-                            <ErrorMessage 
-                                component="span" 
-                                name="confirm"
-                                className="error"
-                                
-                                />  
+                          
 
                             <button 
                                 type="submit"

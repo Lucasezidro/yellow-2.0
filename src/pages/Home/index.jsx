@@ -1,21 +1,19 @@
-import {
-    ErrorMessage,
-    Formik,
-    Form,
-    Field
-} from 'formik'
+import { Formik, Form, Field } from 'formik'
 
 import * as yup from 'yup'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { history } from '../../history'
 import { useState } from 'react'
 import SignWithGoogle from '../../components/Auth/SignWithGoogle'
+
+import { useHistory } from 'react-router-dom'
 
 
 import { Container } from './styles'
 
 export default function Home(){
+    const history = useHistory()
+
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
@@ -30,7 +28,7 @@ export default function Home(){
         if(email && password === '') {
             alert('E-mail and Password is required.')
         } else {
-            history.push('/dashboard')
+            history.push('dashboard')
         }
 
         console.log(data)
@@ -39,7 +37,7 @@ export default function Home(){
     async function handleSignWithGoogle(){
         await SignWithGoogle()
 
-        history.push('/dashboard')
+        history.push('dashboard')
     }
 
     const handleSubmit = values => {
@@ -74,21 +72,17 @@ export default function Home(){
                         <h1>Welcome</h1>
 
                         <Field 
-                        id="email" 
-                        type="email" 
-                        className="input"
-                        placeholder="Your best e-mail" 
-                        name="email" 
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
+                            id="email" 
+                            type="email" 
+                            className="input"
+                            placeholder="Your best e-mail" 
+                            name="email" 
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            required
 
                         />
-                        <ErrorMessage 
-                            component="span" 
-                            name="email"
-                            className="error"
-                            
-                            />
+
 
                         <Field
                             id="password" 
@@ -98,15 +92,10 @@ export default function Home(){
                             name="password" 
                             value={password}
                             onChange={e => setPassword(e.target.value)}
+                            required
 
                         />
 
-                        <ErrorMessage 
-                            component="span" 
-                            name="password"
-                            className="error"
-                            
-                            />  
 
                         <button 
                             type="button"
